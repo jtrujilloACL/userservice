@@ -2,14 +2,24 @@ package io.getarrays.userservice.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
 import io.getarrays.userservice.domain.Role;
+import io.getarrays.userservice.repository.RoleRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Service @RequiredArgsConstructor @Transactional @Slf4j
 public class RoleServiceImplementation implements RoleService{
-
+	
+	private final RoleRepository roleRepositorio;
+	
 	@Override
 	public Role saveRole(Role role) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Save new Role: {} to the database",role.getName());
+		return roleRepositorio.save(role);
 	}
 
 	@Override

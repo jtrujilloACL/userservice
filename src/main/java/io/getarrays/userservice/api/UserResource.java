@@ -32,7 +32,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.getarrays.userservice.domain.Role;
 import io.getarrays.userservice.domain.User;
-import io.getarrays.userservice.service.UserService;
+//import io.getarrays.userservice.service.UserService;
+import io.getarrays.userservice.service.UserServiceImplementation;
 import io.getarrays.userservice.utils.RoleToUserForm;
 import io.getarrays.userservice.utils.UtilToken;
 import lombok.RequiredArgsConstructor;
@@ -48,7 +49,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api")
 @Slf4j
 public class UserResource {
-	private final UserService userService;
+	private final UserServiceImplementation userService;
 	
 	@GetMapping("/users")
 	public List<User> getUser(){
@@ -59,6 +60,7 @@ public class UserResource {
 	
 	@PostMapping("/user/save")
 	public ResponseEntity<User> saveUser(@RequestBody User user){
+		log.info("User Save from POSTMAN: {}",user.getUsername());
 		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toString() );
 		return ResponseEntity.created(uri).body( userService.saveUser(user) );
 	}

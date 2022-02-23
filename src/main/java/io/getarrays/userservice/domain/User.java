@@ -9,9 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,8 +31,4 @@ public class User {
 	
 	@ManyToMany(fetch= FetchType.EAGER)
 	private Collection<Role> roles = new ArrayList<>();
-
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="profileId")
-	private Profile profile;
 }

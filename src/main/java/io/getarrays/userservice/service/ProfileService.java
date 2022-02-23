@@ -10,8 +10,10 @@ import io.getarrays.userservice.domain.Profile;
  * @since 16/02/2022
  */
 public interface ProfileService {
-	Profile findByIndentityDocument(String identityDocument);
+
 	Profile saveProfile(Profile profile);
 	Profile getProfile(Long id);
 	List<Profile> getProfiles();
+	
+	Profile findByIndentityDocument(String identityDocument);
 }

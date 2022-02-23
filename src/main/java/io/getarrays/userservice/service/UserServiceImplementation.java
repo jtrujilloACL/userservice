@@ -98,12 +98,4 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 		user.getRoles().add(role);
 	}
 	
-	@Override
-	public void addProfileToUser(String username, Long id) {
-		log.info("Add profile {} to the user{}", id, username );
-		User user = userRepository.findByUsername(username);
-		Profile profile = new Profile(null,user.getName());
-		user.setProfile(profile);
-	}
-
 }

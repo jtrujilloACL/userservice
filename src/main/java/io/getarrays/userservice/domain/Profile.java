@@ -2,9 +2,12 @@ package io.getarrays.userservice.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,6 +39,11 @@ public class Profile {
 	
 	@Column(nullable = true)
 	private String phoneNumber;
+	
+
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="userId")
+	private User userId;
 	
 	public Profile(Long id, String name) {
 		super();

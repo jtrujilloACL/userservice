@@ -17,7 +17,6 @@ public interface UserService {
 	 User saveUser(User user);
 	 
 	 void addRoleToUser(String username, String roleName);
-	 void addProfileToUser(String username, Long id);
 	 
 	 User getUser(String username);
 	 List<User> getUsers();
