@@ -8,7 +8,7 @@ import io.getarrays.userservice.domain.User;
 /**
  * @author JeanTrujillo
  * @version 1.0
- * @since 16/10/2021
+ * @since 16/02/2022
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{

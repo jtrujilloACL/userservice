@@ -3,15 +3,15 @@ package io.getarrays.userservice.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import io.getarrays.userservice.domain.Role;
+import io.getarrays.userservice.domain.Profile;
 
 /**
  * @author JeanTrujillo
  * @version 1.0
- * @since 16/02/2022
+ * @since 22/08/2022
  */
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long>{
+public interface ProfileRepository extends JpaRepository<Profile, Long>{
 	
-	Role findByName(String name);
+	Profile findByIdentityDocument(String identityDocument);
 }

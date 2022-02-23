@@ -12,8 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.getarrays.userservice.domain.Profile;
 import io.getarrays.userservice.domain.Role;
 import io.getarrays.userservice.domain.User;
+import io.getarrays.userservice.repository.ProfileRepository;
 import io.getarrays.userservice.repository.RoleRepository;
 import io.getarrays.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,8 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 	private final UserRepository userRepository;
 	
 	private final RoleRepository roleRepository;
+	
+	private final ProfileRepository profileRepository; // ProfileService
 	
 	private final PasswordEncoder passwordEnconde;
 	
@@ -64,13 +68,11 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 	}
 
 	@Override
-	public void addRoleToUser(String username, String roleName) {
-		log.info("Add role {} to the user{}",roleName, username );
-		User user = userRepository.findByUsername(username);
-		Role role = roleRepository.findByName(roleName);
-		user.getRoles().add(role);
+	public Profile saveProfile(Profile profile) {
+		log.info("Saving new profile {} to the database", profile.getId() );	
+		return profileRepository.save(profile);
 	}
-
+	
 	@Override
 	public User getUser(String username) {
 		log.info("Fetching user {}",username);
@@ -83,5 +85,20 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 		return userRepository.findAll();
 	}
 
+	@Override
+	public void addRoleToUser(String username, String roleName) {
+		log.info("Add role {} to the user{}",roleName, username );
+		User user = userRepository.findByUsername(username);
+		Role role = roleRepository.findByName(roleName);
+		user.getRoles().add(role);
+	}
+	
+	@Override
+	public void addProfileToUser(String username, Long id) {
+		log.info("Add profile {} to the user{}", id, username );
+		User user = userRepository.findByUsername(username);
+		Profile profile = new Profile(null,user.getName());
+		user.setProfile(profile);
+	}
 
 }

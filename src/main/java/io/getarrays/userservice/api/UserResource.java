@@ -33,6 +33,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.getarrays.userservice.domain.Role;
 import io.getarrays.userservice.domain.User;
 import io.getarrays.userservice.service.UserService;
+//import io.getarrays.userservice.utils.RoleToUserForm;
+import io.getarrays.userservice.utils.UtilToken;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -76,12 +78,13 @@ public class UserResource {
 	
 	@GetMapping("/token/refresh")
 	public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		UtilToken.generateToken();
+		
 		String authorizationHeader = request.getHeader(AUTHORIZATION);
 		log.info("UserResource Header : {}",authorizationHeader);
 		
 		if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
 			try {
-				
 				String refresh_token = authorizationHeader.substring("Bearer ".length() );
 				log.info("Secret get bytes: {}","secret".getBytes());
 				Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
@@ -117,7 +120,7 @@ public class UserResource {
 }
 
 @Data
-class RoleToUserForm{
+class RoleToUserForm {
 	private String username;
 	private String roleName;
 }
