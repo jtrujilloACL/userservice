@@ -21,6 +21,11 @@ import io.getarrays.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * @author JeanTrujillo
+ * @version 1.1
+ * @since 16/10/2021 / 23/02/2022
+ */
 @Service @RequiredArgsConstructor @Transactional @Slf4j
 public class UserServiceImplementation implements UserService, UserDetailsService {
 

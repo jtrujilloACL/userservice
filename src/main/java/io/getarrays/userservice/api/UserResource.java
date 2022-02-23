@@ -33,9 +33,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.getarrays.userservice.domain.Role;
 import io.getarrays.userservice.domain.User;
 import io.getarrays.userservice.service.UserService;
-//import io.getarrays.userservice.utils.RoleToUserForm;
+import io.getarrays.userservice.utils.RoleToUserForm;
 import io.getarrays.userservice.utils.UtilToken;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -117,10 +116,4 @@ public class UserResource {
 			throw new RuntimeException("Refresh token is missing");
 		}
 	}
-}
-
-@Data
-class RoleToUserForm {
-	private String username;
-	private String roleName;
 }
