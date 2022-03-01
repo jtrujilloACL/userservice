@@ -1,4 +1,4 @@
-package io.getarrays.userservice.service;
+package io.getarrays.userservice.implementation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,6 +18,7 @@ import io.getarrays.userservice.domain.User;
 import io.getarrays.userservice.repository.ProfileRepository;
 import io.getarrays.userservice.repository.RoleRepository;
 import io.getarrays.userservice.repository.UserRepository;
+import io.getarrays.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

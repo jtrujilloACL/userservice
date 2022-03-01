@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,35 +20,40 @@ public class Profile {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable = true)
+	@Column(nullable = false, unique = true)
 	private String identityDocument;
 	
-	@Column(nullable = false)
 	private String name;
 	
-	@Column(nullable = true)
 	private String lastName;
 	
-	@Column(nullable = true)
 	private String genre;
 	
-	@Column(nullable = true)
+	@Column(nullable = false, unique = true)
 	private String email;
 	
-	@Column(nullable = true)
 	private String address;
 	
-	@Column(nullable = true)
+	@Column(nullable = false, unique = true)
 	private String phoneNumber;
 	
 
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="userId")
 	private User userId;
+	/*
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "evaluation_id")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Collection<Evaluation> evaluation = new ArrayList<>();
 	
-	public Profile(Long id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "programming_skill_id")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Collection<ProgrammingSkill> programmingSkill = new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.ALL`)
+	@JoinColumn(name = "soft_skill_id")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Collection<SoftSkill> softSkill = new ArrayList<>();*/
 }

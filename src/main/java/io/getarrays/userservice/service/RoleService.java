@@ -2,15 +2,21 @@ package io.getarrays.userservice.service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import io.getarrays.userservice.domain.Role;
 
 public interface RoleService {
-	Role saveRole(Role role); 	//Create
-	Role getRole(Long id);		//Read
-	Role updateRole(Role role); //Update
-	void deleteRole(Long id);   //Delete
 	
-	List<Role> getRoles();		//Read All roles
-	void addRoleToUser(String username, Long id);
+	public Role findByName(String name);
+	
+	public Optional<Role> findById(Long id);
+	
+	public List<Role> findAll();
+	
+	public Role save(Role role);
+	
+	public void deleteById(Long id);
+	
+	public void addRoleToUser(String username, String roleName);
 }

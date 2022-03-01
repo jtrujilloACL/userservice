@@ -54,12 +54,12 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 		Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
 		String acces_token = JWT.create()
 				.withSubject( user.getUsername())
-				.withExpiresAt( new Date( System.currentTimeMillis() + 10 * 60 * 1000 ))
+				.withExpiresAt( new Date( System.currentTimeMillis() + 60 * 60 * 1000 ))
 				.withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect( Collectors.toList() ))
 				.sign(algorithm);
 		String refesh_token = JWT.create()
 				.withSubject( user.getUsername())
-				.withExpiresAt( new Date( System.currentTimeMillis() + 30 * 60 * 1000 ))
+				.withExpiresAt( new Date( System.currentTimeMillis() + 3* 60 * 60 * 1000 ))
 				.sign(algorithm);
 		/*response.setHeader("acces_token", acces_token);
 		response.setHeader("refesh_token", refesh_token);*/
