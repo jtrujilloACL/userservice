@@ -2,7 +2,7 @@ package io.getarrays.userservice.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import io.getarrays.userservice.domain.SoftSkill;
+import io.getarrays.userservice.repository.entity.SoftSkill;
 
 /**
  * @author JeanTrujillo

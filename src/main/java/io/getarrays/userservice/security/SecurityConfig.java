@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import io.getarrays.userservice.filter.CustomAuthenticationFilter;
-import io.getarrays.userservice.filter.CustomAuthorizationFilter;
+import io.getarrays.userservice.security.filter.CustomAuthenticationFilter;
+import io.getarrays.userservice.security.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

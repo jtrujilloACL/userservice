@@ -3,7 +3,7 @@ package io.getarrays.userservice.service;
 import java.util.List;
 import java.util.Optional;
 
-import io.getarrays.userservice.domain.Evaluation;
+import io.getarrays.userservice.repository.entity.Evaluation;
 
 
 public interface EvaluationService {

@@ -2,7 +2,7 @@ package io.getarrays.userservice.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import io.getarrays.userservice.domain.ProgrammingSkill;
+import io.getarrays.userservice.repository.entity.ProgrammingSkill;
 
 /**
  * @author JeanTrujillo

@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import io.getarrays.userservice.domain.Role;
-import io.getarrays.userservice.domain.User;
+import io.getarrays.userservice.repository.entity.Role;
+import io.getarrays.userservice.repository.entity.User;
 import io.getarrays.userservice.service.UserService;
 
 @SpringBootApplication
@@ -33,7 +33,6 @@ public class UserserviceApplication {
 			userService.saveRole(new Role( null,"ROLE_ADMIN"));
 			userService.saveRole(new Role( null,"ROLE_SUPER_ADMIN"));
 						
-			//TODO: remove name and change null of Profile
 			userService.saveUser( new User( null,"name" ,"username" ,"pass",new ArrayList<>() ));
 			userService.saveUser( new User( null,"name2","username2","pass",new ArrayList<>() ));
 			userService.saveUser( new User( null,"name3","username3","pass",new ArrayList<>() ));

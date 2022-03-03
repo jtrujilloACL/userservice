@@ -1,4 +1,4 @@
-package io.getarrays.userservice.DTO;
+package io.getarrays.userservice.dto;
 
 import lombok.Data;
 

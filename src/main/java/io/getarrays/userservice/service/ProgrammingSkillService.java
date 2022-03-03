@@ -3,7 +3,7 @@ package io.getarrays.userservice.service;
 import java.util.List;
 import java.util.Optional;
 
-import io.getarrays.userservice.domain.ProgrammingSkill;
+import io.getarrays.userservice.repository.entity.ProgrammingSkill;
 
 
 public interface ProgrammingSkillService {

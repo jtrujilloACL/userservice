@@ -3,7 +3,7 @@ package io.getarrays.userservice.service;
 import java.util.List;
 import java.util.Optional;
 
-import io.getarrays.userservice.domain.SoftSkill;
+import io.getarrays.userservice.repository.entity.SoftSkill;
 
 public interface SoftSkillService {
 	public SoftSkill findByName(String name);

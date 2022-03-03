@@ -2,9 +2,9 @@ package io.getarrays.userservice.service;
 
 import java.util.List;
 
-import io.getarrays.userservice.domain.Profile;
-import io.getarrays.userservice.domain.Role;
-import io.getarrays.userservice.domain.User;
+import io.getarrays.userservice.repository.entity.Profile;
+import io.getarrays.userservice.repository.entity.Role;
+import io.getarrays.userservice.repository.entity.User;
 
 /**
  * @author JeanTrujillo
