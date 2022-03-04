@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.getarrays.userservice.dto.UserDTO;
 import io.getarrays.userservice.repository.ProfileRepository;
 import io.getarrays.userservice.repository.RoleRepository;
 import io.getarrays.userservice.repository.UserRepository;
@@ -31,10 +32,6 @@ import lombok.extern.slf4j.Slf4j;
 public class UserServiceImplementation implements UserService, UserDetailsService {
 
 	private final UserRepository userRepository;
-	
-	private final RoleRepository roleRepository;
-	
-	private final ProfileRepository profileRepository; // ProfileService
 	
 	private final PasswordEncoder passwordEnconde;
 	
@@ -61,22 +58,13 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 	}
 	
 	@Override
-	public User saveUser(User user) {
-		log.info("Saving new user {} to the database",user.getName() );
-		user.setPassword(passwordEnconde.encode(user.getPassword() ));
+	public User saveUser(UserDTO userDTO) {
+		log.info("Saving new user {} to the database",userDTO.getUsername() );
+		User user = new User();
+		user.setUsername(userDTO.getUsername());
+		user.setPassword(passwordEnconde.encode(userDTO.getPassword() ));
+		user.setRoles( new ArrayList<>() );
 		return userRepository.save(user);
-	}
-
-	@Override
-	public Role saveRole(Role role) {
-		log.info("Saving new role {} to the database",role.getName() );	
-		return roleRepository.save(role);
-	}
-
-	@Override
-	public Profile saveProfile(Profile profile) {
-		log.info("Saving new profile {} to the database", profile.getId() );	
-		return profileRepository.save(profile);
 	}
 	
 	@Override
@@ -89,14 +77,6 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 	public List<User> getUsers() {
 		log.info("Fetching all users");
 		return userRepository.findAll();
-	}
-
-	@Override
-	public void addRoleToUser(String username, String roleName) {
-		log.info("Add role {} to the user{}",roleName, username );
-		User user = userRepository.findByUsername(username);
-		Role role = roleRepository.findByName(roleName);
-		user.getRoles().add(role);
 	}
 	
 }

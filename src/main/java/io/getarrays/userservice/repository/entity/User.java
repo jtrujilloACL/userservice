@@ -26,7 +26,6 @@ public class User {
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String name; //TODO: Move to entity Profile
 	
 	@Column(unique = true)
 	private String username;

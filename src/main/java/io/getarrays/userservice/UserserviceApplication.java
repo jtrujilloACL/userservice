@@ -1,7 +1,5 @@
 package io.getarrays.userservice;
 
-import java.util.ArrayList;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,9 +7,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import io.getarrays.userservice.dto.UserDTO;
 import io.getarrays.userservice.repository.entity.Role;
-import io.getarrays.userservice.repository.entity.User;
+import io.getarrays.userservice.service.RoleService;
 import io.getarrays.userservice.service.UserService;
+import io.getarrays.userservice.utils.Constants;
 
 @SpringBootApplication
 public class UserserviceApplication {
@@ -26,25 +26,25 @@ public class UserserviceApplication {
 	}
 
 	@Bean 
-	CommandLineRunner run(UserService userService) {
+	CommandLineRunner run(UserService userService, RoleService roleService) {
 		return args -> {
-			userService.saveRole(new Role( null,"ROLE_USER"));
-			userService.saveRole(new Role( null,"ROLE_MANAGER"));
-			userService.saveRole(new Role( null,"ROLE_ADMIN"));
-			userService.saveRole(new Role( null,"ROLE_SUPER_ADMIN"));
+			roleService.save(new Role( null, Constants.SPRING_ROLE_USER));
+			roleService.save(new Role( null, Constants.SPRING_ROLE_MANAGER));
+			roleService.save(new Role( null, Constants.SPRING_ROLE_ADMIN));
+			roleService.save(new Role( null, Constants.SPRING_ROLE_SUPER_ADMIN));
 						
-			userService.saveUser( new User( null,"name" ,"username" ,"pass",new ArrayList<>() ));
-			userService.saveUser( new User( null,"name2","username2","pass",new ArrayList<>() ));
-			userService.saveUser( new User( null,"name3","username3","pass",new ArrayList<>() ));
-			userService.saveUser( new User( null,"name4","username4","pass",new ArrayList<>() ));
+			userService.saveUser( new UserDTO( "username" ,"pass" ));
+			userService.saveUser( new UserDTO( "username2","pass" ));
+			userService.saveUser( new UserDTO( "username3","pass" ));
+			userService.saveUser( new UserDTO( "username4","pass" ));
 			
-			userService.addRoleToUser("username", "ROLE_MANAGER");
-			userService.addRoleToUser("username", "ROLE_USER");
-			userService.addRoleToUser("username2", "ROLE_MANAGER");
-			userService.addRoleToUser("username3", "ROLE_ADMIN");
-			userService.addRoleToUser("username4", "ROLE_SUPER_ADMIN");
-			userService.addRoleToUser("username4", "ROLE_ADMIN");
-			userService.addRoleToUser("username4", "ROLE_USER");
+			roleService.addRoleToUser("username", "ROLE_MANAGER");
+			roleService.addRoleToUser("username", "ROLE_USER");
+			roleService.addRoleToUser("username2", "ROLE_MANAGER");
+			roleService.addRoleToUser("username3", "ROLE_ADMIN");
+			roleService.addRoleToUser("username4", "ROLE_SUPER_ADMIN");
+			roleService.addRoleToUser("username4", "ROLE_ADMIN");
+			roleService.addRoleToUser("username4", "ROLE_USER");
 		};
 	}
 }

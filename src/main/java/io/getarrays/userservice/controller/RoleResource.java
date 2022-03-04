@@ -66,10 +66,9 @@ public class RoleResource {
 	
 	@GetMapping
 	public List<Role> getRoles(){
-		List<Role> roles = StreamSupport
+		return StreamSupport
 				.stream(roleService.findAll().spliterator(), false)
 				.collect(Collectors.toList());
-		return roles;
 	}
 	
 	@PutMapping("/{id}")

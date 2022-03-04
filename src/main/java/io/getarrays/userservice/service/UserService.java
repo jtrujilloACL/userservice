@@ -2,22 +2,18 @@ package io.getarrays.userservice.service;
 
 import java.util.List;
 
-import io.getarrays.userservice.repository.entity.Profile;
-import io.getarrays.userservice.repository.entity.Role;
+import io.getarrays.userservice.dto.UserDTO;
 import io.getarrays.userservice.repository.entity.User;
 
 /**
  * @author JeanTrujillo
- * @version 1.0
- * @since 16/02/2022
+ * @version 1.1
+ * @since 16/02/2022 03/03/2022
  */
 public interface UserService {
-	 Role saveRole(Role role); //TODO: MOVE to ROLE SERVICE
-	 Profile saveProfile(Profile profile); //TODO: MOVE to PROFILE SERVICE
-	 User saveUser(User user);
-	 
-	 void addRoleToUser(String username, String roleName);
-	 
+	 User saveUser(UserDTO userDTO);
+	 	 
 	 User getUser(String username);
+	 
 	 List<User> getUsers();
 }
