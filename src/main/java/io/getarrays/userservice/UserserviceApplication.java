@@ -15,6 +15,12 @@ import io.getarrays.userservice.utils.Constants;
 
 @SpringBootApplication
 public class UserserviceApplication {
+	
+	private static final String USER_USERNAME = "username";
+	private static final String USER_USERNAME2 = "username2";
+	private static final String USER_USERNAME3 = "username3";
+	private static final String USER_USERNAME4 = "username4";
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(UserserviceApplication.class, args);
@@ -33,18 +39,18 @@ public class UserserviceApplication {
 			roleService.save(new Role( null, Constants.SPRING_ROLE_ADMIN));
 			roleService.save(new Role( null, Constants.SPRING_ROLE_SUPER_ADMIN));
 						
-			userService.saveUser( new UserDTO( "username" ,"pass" ));
-			userService.saveUser( new UserDTO( "username2","pass" ));
-			userService.saveUser( new UserDTO( "username3","pass" ));
-			userService.saveUser( new UserDTO( "username4","pass" ));
+			userService.saveUser( new UserDTO( USER_USERNAME ,"pass" ));
+			userService.saveUser( new UserDTO( USER_USERNAME2,"pass" ));
+			userService.saveUser( new UserDTO( USER_USERNAME3,"pass" ));
+			userService.saveUser( new UserDTO( USER_USERNAME4,"pass" ));
 			
-			roleService.addRoleToUser("username", "ROLE_MANAGER");
-			roleService.addRoleToUser("username", "ROLE_USER");
-			roleService.addRoleToUser("username2", "ROLE_MANAGER");
-			roleService.addRoleToUser("username3", "ROLE_ADMIN");
-			roleService.addRoleToUser("username4", "ROLE_SUPER_ADMIN");
-			roleService.addRoleToUser("username4", "ROLE_ADMIN");
-			roleService.addRoleToUser("username4", "ROLE_USER");
+			roleService.addRoleToUser(USER_USERNAME,  Constants.SPRING_ROLE_MANAGER);
+			roleService.addRoleToUser(USER_USERNAME,  Constants.SPRING_ROLE_USER);
+			roleService.addRoleToUser(USER_USERNAME2, Constants.SPRING_ROLE_MANAGER);
+			roleService.addRoleToUser(USER_USERNAME3, Constants.SPRING_ROLE_ADMIN);
+			roleService.addRoleToUser(USER_USERNAME4, Constants.SPRING_ROLE_SUPER_ADMIN);
+			roleService.addRoleToUser(USER_USERNAME4, Constants.SPRING_ROLE_ADMIN);
+			roleService.addRoleToUser(USER_USERNAME4, Constants.SPRING_ROLE_USER);
 		};
 	}
 }

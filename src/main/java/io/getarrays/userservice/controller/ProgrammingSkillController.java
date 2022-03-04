@@ -19,54 +19,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import io.getarrays.userservice.dto.SoftSkillDTO;
-import io.getarrays.userservice.repository.entity.SoftSkill;
-import io.getarrays.userservice.service.implementation.SoftSkillServiceImplementation;
+import io.getarrays.userservice.repository.entity.ProgrammingSkill;
+import io.getarrays.userservice.service.implementation.ProgrammingSkillServiceImplementation;
 
 /**
  * @author JeanTrujillo
  * @version 1.0
- * @since 01/03/2022
+ * @since 24/02/2022
  */
 @RestController
-@RequestMapping("/api/soft-skill")
-public class SoftSkillResource {
+@RequestMapping("/api/programming-skill")
+public class ProgrammingSkillController {
 
 	@Autowired
-	private SoftSkillServiceImplementation softSkillService;
+	private ProgrammingSkillServiceImplementation programmingSkillService;
 	
 	@PostMapping
-	public ResponseEntity<?> saveProgrammingSkill(@RequestBody SoftSkill softSkill){
+	public ResponseEntity<?> saveProgrammingSkill(@RequestBody ProgrammingSkill programmingSkill){
 		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/evaluation/save").toString() );
-		return ResponseEntity.created(uri).body( softSkillService.save(softSkill));
+		return ResponseEntity.created(uri).body( programmingSkillService.save(programmingSkill));
 	}
 	
 	@GetMapping("/all")
-	public List<SoftSkill> getSkill(){
+	public List<ProgrammingSkill> getSkill(){
 		return StreamSupport
-				.stream(softSkillService.findAll().spliterator(), false)
+				.stream(programmingSkillService.findAll().spliterator(), false)
 				.collect(Collectors.toList());
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateSkill(@RequestBody SoftSkillDTO skillDetail, @PathVariable(value = "id") Long skillId) {
-		Optional<SoftSkill> skill = softSkillService.findById(skillId);
+	public ResponseEntity<?> updateSkill(@RequestBody ProgrammingSkill skillDetail, @PathVariable(value = "id") Long skillId) {
+		Optional<ProgrammingSkill> skill = programmingSkillService.findById(skillId);
 
 		if (!skill.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 		skill.get().setName(skillDetail.getName());
+		skill.get().setLevel(skillDetail.getLevel());
 		skill.get().setDescription(skillDetail.getDescription());
-		return ResponseEntity.status(HttpStatus.CREATED).body(softSkillService.save(skill.get()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(programmingSkillService.save(skill.get()));
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteSkill(@PathVariable(value="id") Long id ){
-		if (!softSkillService.findById(id).isPresent()) {
+		if (!programmingSkillService.findById(id).isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		softSkillService.deleteById(id);
+		programmingSkillService.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
-	
+
 }

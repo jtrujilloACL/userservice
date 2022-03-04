@@ -34,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/api/role")
 @Slf4j
-public class RoleResource {
+public class RoleController {
 
 	@Autowired
 	private RoleServiceImplementation roleService;
