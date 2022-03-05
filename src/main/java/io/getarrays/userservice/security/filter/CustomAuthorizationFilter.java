@@ -27,6 +27,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.getarrays.userservice.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -51,16 +52,14 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter{
 			if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
 				try {
 					String token = authorizationHeader.substring("Bearer ".length() );
-					Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+					Algorithm algorithm = Algorithm.HMAC256(Constants.SPRING_SECRET_KEY.getBytes());
 					JWTVerifier verifier = JWT.require(algorithm).build();
 					DecodedJWT decodeJWT = verifier.verify(token);
 					String username = decodeJWT.getSubject();
 					String[] roles = decodeJWT.getClaim("roles").asArray(String.class);
 					Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-					stream(roles).forEach(role->{
-						authorities.add(new SimpleGrantedAuthority(role));
-					});
-					UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, null, authorities);
+					stream(roles).forEach( role->authorities.add(new SimpleGrantedAuthority(role)) );
+					UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,null, authorities);
 					SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 					filterChain.doFilter(request, response);
 

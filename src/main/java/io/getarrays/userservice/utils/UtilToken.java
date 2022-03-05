@@ -26,11 +26,10 @@ public final class UtilToken {
 		try {
 			String authorizationHeader = request.getHeader(AUTHORIZATION);
 			String token = authorizationHeader.substring("Bearer ".length() );
-			Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+			Algorithm algorithm = Algorithm.HMAC256(Constants.SPRING_SECRET_KEY.getBytes());
 			JWTVerifier verifier = JWT.require(algorithm).build();
 			DecodedJWT decodeJWT = verifier.verify(token);
-			String username = decodeJWT.getSubject();
-			return username;
+			return decodeJWT.getSubject();
 		} catch (Exception e) {
 			//TODO: Add exception
 			log.info("Error getUsernameToToken: {}",e.getMessage());

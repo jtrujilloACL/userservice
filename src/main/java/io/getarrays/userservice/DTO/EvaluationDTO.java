@@ -8,4 +8,5 @@ public class EvaluationDTO {
 	private String title;
 	private String observation;
 	private Integer score;
+	private Long profileId;
 }

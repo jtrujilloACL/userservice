@@ -3,6 +3,7 @@ package io.getarrays.userservice.service;
 import java.util.List;
 import java.util.Optional;
 
+import io.getarrays.userservice.dto.EvaluationDTO;
 import io.getarrays.userservice.repository.entity.Evaluation;
 
 
@@ -13,10 +14,12 @@ public interface EvaluationService {
 	
 	public List<Evaluation> findAll();
 	
-	public Evaluation save(Evaluation evaluation);
+	public Evaluation save(EvaluationDTO evaluationDTO);
 	
 	public void deleteById(Long id);
 	
 	public void addEvaluationToProfile(Long id, String identityDocument );
+
+	Evaluation update(EvaluationDTO evaluationDTO);
 
 }

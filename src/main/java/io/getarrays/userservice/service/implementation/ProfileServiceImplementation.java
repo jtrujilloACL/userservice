@@ -24,6 +24,11 @@ public class ProfileServiceImplementation implements ProfileService{
 	}
 
 	@Override
+	public Profile findByUserId(Long id) {
+		return profileRepository.findByUserId(id);
+	}
+	
+	@Override
 	public Optional<Profile> findById(Long id) {
 		return profileRepository.findById(id);
 	}
@@ -48,6 +53,7 @@ public class ProfileServiceImplementation implements ProfileService{
 	public void addUserToProfile(String username, Long id) {
 
 	}
+
 		
 
 }

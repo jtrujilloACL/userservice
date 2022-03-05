@@ -7,11 +7,13 @@ import io.getarrays.userservice.repository.entity.Profile;
 
 /**
  * @author JeanTrujillo
- * @version 1.0
- * @since 22/08/2022
+ * @version 1.1
+ * @since 22/08/2022 04/03/2022
  */
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Long>{
 	
 	Profile findByIdentityDocument(String identityDocument);
+
+	Profile findByUserId(Long id);
 }

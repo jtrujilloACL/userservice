@@ -32,8 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author JeanTrujillo
- * @version 1.0
- * @since 24/02/2022
+ * @version 1.2
+ * @since 24/02/2022 04/03/2022
  */
 @RestController
 @RequestMapping("/api/evaluation")
@@ -47,13 +47,12 @@ public class EvaluationController {
 	private ProfileServiceImplementation profileService;
 	
 	@PostMapping("/save")
-	public ResponseEntity<Evaluation> save(HttpServletRequest request, @RequestBody EvaluationDTO evaluationForm){
-		log.info("Save a new evaluation: {} to the database",evaluationForm.getTitle());
-		Evaluation evaluation = new Evaluation();
-		String username = UtilToken.getUsernameToToken(request);
-		
+	public ResponseEntity<Evaluation> save(HttpServletRequest request, @RequestBody EvaluationDTO evaluationDTO){
+		log.info("Save a new evaluation: {} to the database",evaluationDTO.getTitle());
+		/*String usernameProfile = UtilToken.getUsernameToToken(request);
+		evaluationDTO.setProfileId(usernameProfile);*/
 		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/evaluation/save").toString() );
-		return ResponseEntity.created(uri).body( evaluationService.save(evaluation));
+		return ResponseEntity.created(uri).body( evaluationService.save(evaluationDTO));
 	}
 	
 	@GetMapping("/all")
@@ -64,19 +63,14 @@ public class EvaluationController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateEvaluations(@RequestBody EvaluationDTO evalDetail, @PathVariable(value = "id") Long evalId) {
+	public ResponseEntity<?> updateEvaluations(@RequestBody EvaluationDTO evalDTO, @PathVariable(value = "id") Long evalId) {
 		Optional<Evaluation> evaluation = evaluationService.findById(evalId);
 
 		if (!evaluation.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 
-		evaluation.get().setDate( evalDetail.getDate());
-		evaluation.get().setTitle(evalDetail.getTitle());
-		evaluation.get().setObservation(evalDetail.getObservation());
-		evaluation.get().setScore(evalDetail.getScore());
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(evaluationService.save(evaluation.get()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(evaluationService.update(evalDTO));
 	}
 	
 	@DeleteMapping("/{id}")

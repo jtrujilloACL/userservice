@@ -16,6 +16,8 @@ public interface ProfileService {
 	
 	public Optional<Profile> findById(Long id);
 	
+	public Profile findByUserId(Long id);
+	
 	public List<Profile> findAll();
 
 	public Profile save(Profile profile);
