@@ -37,7 +37,7 @@ public class ProgrammingSkillController {
 	
 	@PostMapping("/save")
 	public ResponseEntity<?> saveProgrammingSkill(@RequestBody ProgrammingSkillDTO programmingSkillDTO){
-		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/evaluation/save").toString() );
+		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/programming-skill/save").toString() );
 		return ResponseEntity.created(uri).body( programmingSkillService.save(programmingSkillDTO));
 	}
 	

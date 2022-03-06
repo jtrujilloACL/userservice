@@ -36,9 +36,9 @@ public class SoftSkillController {
 	private SoftSkillServiceImplementation softSkillService;
 	
 	@PostMapping
-	public ResponseEntity<?> saveProgrammingSkill(@RequestBody SoftSkill softSkill){
-		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/evaluation/save").toString() );
-		return ResponseEntity.created(uri).body( softSkillService.save(softSkill));
+	public ResponseEntity<?> saveSkill(@RequestBody SoftSkillDTO softSkillDTO){
+		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/soft-skill/save").toString() );
+		return ResponseEntity.created(uri).body( softSkillService.save(softSkillDTO));
 	}
 	
 	@GetMapping("/all")
@@ -49,15 +49,12 @@ public class SoftSkillController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateSkill(@RequestBody SoftSkillDTO skillDetail, @PathVariable(value = "id") Long skillId) {
+	public ResponseEntity<?> updateSkill(@RequestBody SoftSkillDTO softSkillDTO, @PathVariable(value = "id") Long skillId) {
 		Optional<SoftSkill> skill = softSkillService.findById(skillId);
-
 		if (!skill.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		skill.get().setName(skillDetail.getName());
-		skill.get().setDescription(skillDetail.getDescription());
-		return ResponseEntity.status(HttpStatus.CREATED).body(softSkillService.save(skill.get()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(softSkillService.update(softSkillDTO));
 	}
 	
 	@DeleteMapping("/{id}")

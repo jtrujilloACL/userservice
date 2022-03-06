@@ -3,6 +3,7 @@ package io.getarrays.userservice.service;
 import java.util.List;
 import java.util.Optional;
 
+import io.getarrays.userservice.dto.SoftSkillDTO;
 import io.getarrays.userservice.repository.entity.SoftSkill;
 
 public interface SoftSkillService {
@@ -11,11 +12,12 @@ public interface SoftSkillService {
 	public Optional<SoftSkill> findById(Long id);
 	
 	public List<SoftSkill> findAll();
-	
-	public SoftSkill save(SoftSkill softSkill);
-	
+
 	public void deleteById(Long id);
 	
-	public void addSoftSkillToProfile(String name, String identityDocument );
-
+	public SoftSkill save(SoftSkillDTO softSkillDTO);
+	
+	public SoftSkill update(SoftSkillDTO softSkillDTO);
+	
+	
 }

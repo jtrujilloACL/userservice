@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import io.getarrays.userservice.dto.SoftSkillDTO;
 import io.getarrays.userservice.repository.SoftSkillRepository;
 import io.getarrays.userservice.repository.entity.Profile;
 import io.getarrays.userservice.repository.entity.SoftSkill;
@@ -18,12 +19,14 @@ import lombok.RequiredArgsConstructor;
  * @version 1.0
  * @since 24/02/2022
  */
-@Service @RequiredArgsConstructor @Transactional
-public class SoftSkillServiceImplementation implements SoftSkillService{
-	
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class SoftSkillServiceImplementation implements SoftSkillService {
+
 	private final SoftSkillRepository softSkillRepository;
 	private final ProfileServiceImplementation profileService;
-	
+
 	@Override
 	public SoftSkill findByName(String name) {
 		return softSkillRepository.findByName(name);
@@ -40,21 +43,33 @@ public class SoftSkillServiceImplementation implements SoftSkillService{
 	}
 
 	@Override
-	public SoftSkill save(SoftSkill softSkill) {
-		return softSkillRepository.save(softSkill);
-	}
-
-	@Override
 	public void deleteById(Long id) {
 		softSkillRepository.deleteById(id);
 	}
 
 	@Override
-	public void addSoftSkillToProfile(String name, String identityDocument) {
-		SoftSkill softSkill = softSkillRepository.findByName(name);
-		Profile profile = profileService.findByIdentityDocument(identityDocument);
-		//profile.getSoftSkill().add(softSkill);		
+	public SoftSkill save(SoftSkillDTO softSkillDTO) {
+		//TODO: Class Map Structur
+		SoftSkill skill = new SoftSkill();
+		skill.setName(softSkillDTO.getName());
+		skill.setDescription(softSkillDTO.getDescription());
+		
+		SoftSkill skillSave = softSkillRepository.save(skill);
+		
+		Optional<Profile> profile = profileService.findById(softSkillDTO.getProfileId());
+		if( profile.isPresent() ) {
+			profile.get().getSoftSkill().add(skill);
+			profileService.save(profile.get());
+		}		
+		return skillSave;
 	}
-	
 
+	@Override
+	public SoftSkill update(SoftSkillDTO softSkillDTO) {
+		// TODO: Class Map Structur
+		SoftSkill  skill = new SoftSkill();
+		skill.setName(softSkillDTO.getName());
+		skill.setDescription(softSkillDTO.getDescription());
+		return softSkillRepository.save(skill);
+	}
 }
