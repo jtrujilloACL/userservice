@@ -1,4 +1,4 @@
-	package io.getarrays.userservice.service.implementation;
+package io.getarrays.userservice.service.implementation;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import io.getarrays.userservice.dto.ProgrammingSkillDTO;
 import io.getarrays.userservice.repository.ProgrammingSkillRepository;
 import io.getarrays.userservice.repository.entity.Profile;
 import io.getarrays.userservice.repository.entity.ProgrammingSkill;
@@ -35,20 +36,37 @@ public class ProgrammingSkillServiceImplementation implements ProgrammingSkillSe
 	}
 
 	@Override
-	public ProgrammingSkill save(ProgrammingSkill programmingSkill) {
-		return programmingSkillRepository.save(programmingSkill);
-	}
-
-	@Override
 	public void deleteById(Long id) {
 		programmingSkillRepository.deleteById(id);		
 	}
 
 	@Override
-	public void addProgrammingSkillToProfile(String name, String identityDocument) {
-		ProgrammingSkill programmingSkill = programmingSkillRepository.findByName(name);
-		Profile profile = profileService.findByIdentityDocument(identityDocument);
-		//profile.getProgrammingSkill().add(programmingSkill);
+	public ProgrammingSkill save(ProgrammingSkillDTO programmingSkillDTO) {
+		//TODO: Class Map Structur
+		ProgrammingSkill skill = new ProgrammingSkill();
+		skill.setName(programmingSkillDTO.getName());
+		skill.setLevel(programmingSkillDTO.getLevel());
+		skill.setDescription(programmingSkillDTO.getDescription());
+		
+		ProgrammingSkill skillSave = programmingSkillRepository.save(skill);
+		
+		Optional<Profile> profile = profileService.findById(programmingSkillDTO.getProfileId());
+		if( profile.isPresent() ) {
+			profile.get().getProgrammingSkill().add(skill);
+			profileService.save(profile.get());
+		}		
+		return skillSave;
+	}
+
+	@Override
+	public ProgrammingSkill update(ProgrammingSkillDTO programmingSkillDTO) {
+		//TODO: Class Map Structur
+		ProgrammingSkill skill = new ProgrammingSkill();
+		skill.setName(programmingSkillDTO.getName());
+		skill.setLevel(programmingSkillDTO.getLevel());
+		skill.setDescription(programmingSkillDTO.getDescription());
+				
+		return programmingSkillRepository.save(skill);
 	}
 
 }

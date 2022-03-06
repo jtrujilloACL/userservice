@@ -13,11 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import io.getarrays.userservice.dto.UserDTO;
-import io.getarrays.userservice.repository.ProfileRepository;
-import io.getarrays.userservice.repository.RoleRepository;
 import io.getarrays.userservice.repository.UserRepository;
-import io.getarrays.userservice.repository.entity.Profile;
-import io.getarrays.userservice.repository.entity.Role;
 import io.getarrays.userservice.repository.entity.User;
 import io.getarrays.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;

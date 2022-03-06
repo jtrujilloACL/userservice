@@ -51,7 +51,6 @@ public class EvaluationServiceImplementation implements EvaluationService{
 			log.info("profileName: {}", profile.get().getName() );
 			profile.get().getEvaluation().add(evaluation);
 			profileService.save(profile.get());
-
 		}		
 		return evalSave;
 	}

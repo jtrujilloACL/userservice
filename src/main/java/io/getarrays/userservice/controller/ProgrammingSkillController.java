@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.getarrays.userservice.dto.ProgrammingSkillDTO;
 import io.getarrays.userservice.repository.entity.ProgrammingSkill;
 import io.getarrays.userservice.service.implementation.ProgrammingSkillServiceImplementation;
 
@@ -34,10 +35,10 @@ public class ProgrammingSkillController {
 	@Autowired
 	private ProgrammingSkillServiceImplementation programmingSkillService;
 	
-	@PostMapping
-	public ResponseEntity<?> saveProgrammingSkill(@RequestBody ProgrammingSkill programmingSkill){
+	@PostMapping("/save")
+	public ResponseEntity<?> saveProgrammingSkill(@RequestBody ProgrammingSkillDTO programmingSkillDTO){
 		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/evaluation/save").toString() );
-		return ResponseEntity.created(uri).body( programmingSkillService.save(programmingSkill));
+		return ResponseEntity.created(uri).body( programmingSkillService.save(programmingSkillDTO));
 	}
 	
 	@GetMapping("/all")
@@ -48,16 +49,12 @@ public class ProgrammingSkillController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateSkill(@RequestBody ProgrammingSkill skillDetail, @PathVariable(value = "id") Long skillId) {
+	public ResponseEntity<?> updateSkill(@RequestBody ProgrammingSkillDTO skillDetailDTO, @PathVariable(value = "id") Long skillId) {
 		Optional<ProgrammingSkill> skill = programmingSkillService.findById(skillId);
-
 		if (!skill.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		skill.get().setName(skillDetail.getName());
-		skill.get().setLevel(skillDetail.getLevel());
-		skill.get().setDescription(skillDetail.getDescription());
-		return ResponseEntity.status(HttpStatus.CREATED).body(programmingSkillService.save(skill.get()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(programmingSkillService.update(skillDetailDTO));
 	}
 	
 	@DeleteMapping("/{id}")
