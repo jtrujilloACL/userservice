@@ -11,7 +11,6 @@ import io.getarrays.userservice.dto.EvaluationDTO;
 import io.getarrays.userservice.repository.EvaluationRepository;
 import io.getarrays.userservice.repository.entity.Evaluation;
 import io.getarrays.userservice.repository.entity.Profile;
-import io.getarrays.userservice.repository.entity.User;
 import io.getarrays.userservice.service.EvaluationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +20,6 @@ public class EvaluationServiceImplementation implements EvaluationService{
 	
 	private final EvaluationRepository evaluationRepository;
 	private final ProfileServiceImplementation profileService;
-	private final UserServiceImplementation userService;
 	
 	@Override
 	public Evaluation findByTitle(String name) {
@@ -41,8 +39,6 @@ public class EvaluationServiceImplementation implements EvaluationService{
 	@Override
 	public Evaluation save(EvaluationDTO evaluationDTO) {
 		log.info("Save new Evalutation with Title: {} to the database",evaluationDTO.getTitle());
-		
-		log.info("profileId: {}",evaluationDTO.getProfileId());
 		Evaluation evaluation = new Evaluation();
 		evaluation.setDate(evaluationDTO.getDate());
 		evaluation.setObservation(evaluationDTO.getObservation());
@@ -76,13 +72,6 @@ public class EvaluationServiceImplementation implements EvaluationService{
 	@Override
 	public void deleteById(Long id) {
 		evaluationRepository.deleteById(id);
-	}
-
-	@Override
-	public void addEvaluationToProfile(Long id, String identityDocument) {
-		Evaluation evaluation = evaluationRepository.getById(id);
-		Profile profile = profileService.findByIdentityDocument(identityDocument);
-		//profile.getEvaluation().add(evaluation);
 	}
 
 }

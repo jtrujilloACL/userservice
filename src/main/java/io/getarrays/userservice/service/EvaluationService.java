@@ -18,8 +18,6 @@ public interface EvaluationService {
 	
 	public void deleteById(Long id);
 	
-	public void addEvaluationToProfile(Long id, String identityDocument );
-
 	Evaluation update(EvaluationDTO evaluationDTO);
 
 }
