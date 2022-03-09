@@ -23,8 +23,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.getarrays.userservice.repository.entity.Profile;
 import io.getarrays.userservice.repository.entity.User;
-import io.getarrays.userservice.service.implementation.ProfileServiceImplementation;
-import io.getarrays.userservice.service.implementation.UserServiceImplementation;
+import io.getarrays.userservice.service.ProfileService;
+import io.getarrays.userservice.service.UserService;
 import io.getarrays.userservice.utils.UtilToken;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,10 +41,10 @@ import lombok.extern.slf4j.Slf4j;
 public class ProfileController {
 	
 	@Autowired
-	private final ProfileServiceImplementation profileService;
+	private final ProfileService profileService;
 	
 	@Autowired
-	private final UserServiceImplementation userService;
+	private final UserService userService;
 		
 	@PostMapping("/save")
 	public ResponseEntity<Profile> saveProfile(HttpServletRequest request, @RequestBody Profile profile) {

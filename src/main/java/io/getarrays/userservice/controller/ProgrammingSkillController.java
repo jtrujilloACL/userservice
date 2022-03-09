@@ -21,7 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.getarrays.userservice.dto.ProgrammingSkillDTO;
 import io.getarrays.userservice.repository.entity.ProgrammingSkill;
-import io.getarrays.userservice.service.implementation.ProgrammingSkillServiceImplementation;
+import io.getarrays.userservice.service.ProgrammingSkillService;
 
 /**
  * @author JeanTrujillo
@@ -33,7 +33,7 @@ import io.getarrays.userservice.service.implementation.ProgrammingSkillServiceIm
 public class ProgrammingSkillController {
 
 	@Autowired
-	private ProgrammingSkillServiceImplementation programmingSkillService;
+	private ProgrammingSkillService programmingSkillService;
 	
 	@PostMapping("/save")
 	public ResponseEntity<?> saveProgrammingSkill(@RequestBody ProgrammingSkillDTO programmingSkillDTO){

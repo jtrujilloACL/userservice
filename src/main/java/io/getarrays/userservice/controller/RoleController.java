@@ -22,8 +22,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import io.getarrays.userservice.dto.RoleToUserDTO;
 import io.getarrays.userservice.repository.entity.Role;
 import io.getarrays.userservice.repository.entity.User;
-import io.getarrays.userservice.service.implementation.RoleServiceImplementation;
-import io.getarrays.userservice.service.implementation.UserServiceImplementation;
+import io.getarrays.userservice.service.RoleService;
+import io.getarrays.userservice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -37,10 +37,10 @@ import lombok.extern.slf4j.Slf4j;
 public class RoleController {
 
 	@Autowired
-	private RoleServiceImplementation roleService;
+	private RoleService roleService;
 	
 	@Autowired
-	private UserServiceImplementation userService;
+	private UserService userService;
 	
 	@PostMapping("/save")
 	public ResponseEntity<Role> saveRole(@RequestBody Role role){

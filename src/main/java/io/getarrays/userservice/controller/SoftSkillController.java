@@ -21,7 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.getarrays.userservice.dto.SoftSkillDTO;
 import io.getarrays.userservice.repository.entity.SoftSkill;
-import io.getarrays.userservice.service.implementation.SoftSkillServiceImplementation;
+import io.getarrays.userservice.service.SoftSkillService;
 
 /**
  * @author JeanTrujillo
@@ -33,7 +33,7 @@ import io.getarrays.userservice.service.implementation.SoftSkillServiceImplement
 public class SoftSkillController {
 
 	@Autowired
-	private SoftSkillServiceImplementation softSkillService;
+	private SoftSkillService softSkillService;
 	
 	@PostMapping
 	public ResponseEntity<?> saveSkill(@RequestBody SoftSkillDTO softSkillDTO){

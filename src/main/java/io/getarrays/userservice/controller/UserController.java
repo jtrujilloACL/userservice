@@ -33,7 +33,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.getarrays.userservice.dto.UserDTO;
 import io.getarrays.userservice.repository.entity.Role;
 import io.getarrays.userservice.repository.entity.User;
-import io.getarrays.userservice.service.implementation.UserServiceImplementation;
+import io.getarrays.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,7 +48,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserController {
 	@Autowired
-	private final UserServiceImplementation userService;
+	private final UserService userService;
 	
 	@GetMapping("/users")
 	public List<User> getUser(){
