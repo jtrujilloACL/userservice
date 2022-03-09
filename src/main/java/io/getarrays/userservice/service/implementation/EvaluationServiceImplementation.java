@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.getarrays.userservice.dto.EvaluationDTO;
@@ -18,7 +19,10 @@ import lombok.extern.slf4j.Slf4j;
 @Service @RequiredArgsConstructor @Transactional @Slf4j
 public class EvaluationServiceImplementation implements EvaluationService{
 	
+	@Autowired
 	private final EvaluationRepository evaluationRepository;
+	
+	@Autowired
 	private final ProfileServiceImplementation profileService;
 	
 	@Override
@@ -51,7 +55,8 @@ public class EvaluationServiceImplementation implements EvaluationService{
 			log.info("profileName: {}", profile.get().getName() );
 			profile.get().getEvaluation().add(evaluation);
 			profileService.save(profile.get());
-		}		
+		}
+
 		return evalSave;
 	}
 

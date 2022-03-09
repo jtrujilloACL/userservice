@@ -21,7 +21,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.getarrays.userservice.dto.EvaluationDTO;
 import io.getarrays.userservice.repository.entity.Evaluation;
-import io.getarrays.userservice.service.implementation.EvaluationServiceImplementation;
+import io.getarrays.userservice.service.EvaluationService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @author JeanTrujillo
@@ -30,17 +32,18 @@ import io.getarrays.userservice.service.implementation.EvaluationServiceImplemen
  */
 @RestController
 @RequestMapping("/api/evaluation")
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class EvaluationController {
 	
 	@Autowired
-	private EvaluationServiceImplementation evaluationService;
+	private EvaluationService evaluationService;
 	
 	@PostMapping("/save")
 	public ResponseEntity<Evaluation> save(@RequestBody EvaluationDTO evaluationDTO){
 		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/evaluation/save").toString() );
 		return ResponseEntity.created(uri).body( evaluationService.save(evaluationDTO));
 	}
-	
 	
 	@GetMapping("/all")
 	public List<Evaluation> getEvaluations(){
