@@ -24,6 +24,7 @@ import io.getarrays.userservice.repository.entity.Evaluation;
 import io.getarrays.userservice.service.EvaluationService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author JeanTrujillo
@@ -34,6 +35,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/evaluation")
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Slf4j
 public class EvaluationController {
 	
 	@Autowired
@@ -41,6 +43,7 @@ public class EvaluationController {
 	
 	@PostMapping("/save")
 	public ResponseEntity<Evaluation> save(@RequestBody EvaluationDTO evaluationDTO){
+		log.info("EvaluationController.save() ");
 		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/evaluation/save").toString() );
 		return ResponseEntity.created(uri).body( evaluationService.save(evaluationDTO));
 	}
@@ -59,7 +62,7 @@ public class EvaluationController {
 		if (!evaluation.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body(evaluationService.update(evaluationDTO));
+		return ResponseEntity.status(HttpStatus.CREATED).body(evaluationService.update(evaluationDTO,evalId));
 	}
 	
 	

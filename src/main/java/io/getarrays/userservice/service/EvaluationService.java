@@ -18,6 +18,6 @@ public interface EvaluationService {
 	
 	public void deleteById(Long id);
 	
-	Evaluation update(EvaluationDTO evaluationDTO);
+	Evaluation update(EvaluationDTO evaluationDTO, Long evalId);
 
 }

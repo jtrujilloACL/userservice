@@ -13,6 +13,7 @@ import io.getarrays.userservice.repository.EvaluationRepository;
 import io.getarrays.userservice.repository.entity.Evaluation;
 import io.getarrays.userservice.repository.entity.Profile;
 import io.getarrays.userservice.service.EvaluationService;
+import io.getarrays.userservice.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +24,7 @@ public class EvaluationServiceImplementation implements EvaluationService{
 	private final EvaluationRepository evaluationRepository;
 	
 	@Autowired
-	private final ProfileServiceImplementation profileService;
+	private final ProfileService profileService;
 	
 	@Override
 	public Evaluation findByTitle(String name) {
@@ -61,15 +62,14 @@ public class EvaluationServiceImplementation implements EvaluationService{
 	}
 
 	@Override
-	public Evaluation update(EvaluationDTO evaluationDTO) {
+	public Evaluation update(EvaluationDTO evaluationDTO, Long evalId) {
 		log.info("Save new Evalutation with Title: {} to the database",evaluationDTO.getTitle());
-		
-		Evaluation evaluation = new Evaluation();
+		Optional<Evaluation> eval = evaluationRepository.findById(evalId);
+		Evaluation evaluation = eval.get();
 		evaluation.setDate(evaluationDTO.getDate());
 		evaluation.setObservation(evaluationDTO.getObservation());
 		evaluation.setScore(evaluationDTO.getScore());
 		evaluation.setTitle(evaluationDTO.getTitle());
-				
 		return evaluationRepository.save(evaluation);
 	}
 
